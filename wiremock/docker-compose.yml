@@ -1,0 +1,16 @@
+services:
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    container_name: wiremock
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./files:/home/wiremock/__files
+      - ./mappings:/home/wiremock/mappings
+      - ./extensions:/var/wiremock/extensions
+    entrypoint: [
+      "/docker-entrypoint.sh",
+      "--enable-stub-cors",
+      "--global-response-templating"
+    ]
+
