@@ -1,36 +1,5 @@
 {
-  "extensions": ["state-extension"],
   "mappings": [
-    {
-      "request": {
-        "method": "POST",
-        "url": "/initialize"
-      },
-      "response": {
-        "status": 200,
-        "body": "{\"message\": \"Initialized\"}",
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "transformers": ["response-template"]
-      },
-      "postServeActions": {
-        "state": {
-          "actions": [
-            {
-              "type": "SET_VARIABLE",
-              "name": "todos",
-              "value": "[]"
-            },
-            {
-              "type": "SET_VARIABLE",
-              "name": "nextId",
-              "value": 1
-            }
-          ]
-        }
-      }
-    },
     {
       "request": {
         "method": "POST",
@@ -38,28 +7,37 @@
       },
       "response": {
         "status": 200,
-        "body": "{ \"id\": {{variables.nextId}}, \"title\": \"{{jsonPath request.body '$.title'}}\" }",
+        "bodyFileName": "responses/postTodo.json",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/todos"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "responses/getTodos.json",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPattern": "/todos/.*"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "responses/getTodo.json",
         "headers": {
           "Content-Type": "application/json"
         },
         "transformers": ["response-template"]
-      },
-      "postServeActions": {
-        "state": {
-          "actions": [
-            {
-              "type": "MODIFY_VARIABLE",
-              "name": "todos",
-              "modifier": "ADD_TO_LIST",
-              "value": "{ \"id\": {{variables.nextId}}, \"title\": \"{{jsonPath request.body '$.title'}}\" }"
-            },
-            {
-              "type": "SET_VARIABLE",
-              "name": "nextId",
-              "value": "{{math variables.nextId 1 'add'}}"
-            }
-          ]
-        }
       }
     }
   ]
