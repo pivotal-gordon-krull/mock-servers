@@ -1,0 +1,15 @@
+{
+  "name": "prism",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dynamic": "prism mock -d -p 8082 swagger.json",
+    "static": "prism mock -p 8082 swagger.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@stoplight/prism-cli": "^5.12.0"
+  }
+}

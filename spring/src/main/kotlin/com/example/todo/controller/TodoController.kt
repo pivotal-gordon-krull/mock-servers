@@ -11,7 +11,7 @@ import java.util.*
 
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/todos", produces = ["application/json"], consumes = ["application/json"])
 class TodoController {
     private val todos: MutableMap<UUID, Todo> = mutableMapOf()
 
