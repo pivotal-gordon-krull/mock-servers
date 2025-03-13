@@ -39,6 +39,82 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "scenarioName": "Add and delete",
+      "newScenarioState": "Initialized",
+      "request": {
+        "method": "POST",
+        "urlPattern": "/initialize"
+      },
+      "response": {
+        "status": 200,
+        "body": "Scenario initialized",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "scenarioName": "Add and delete",
+      "requiredScenarioState": "Initialized",
+      "request": {
+        "method": "GET",
+        "urlPattern": "/todos"
+      },
+      "response": {
+        "status": 200,
+        "body": "[]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "scenarioName": "Add and delete",
+      "requiredScenarioState": "Initialized",
+      "newScenarioState": "Added",
+      "request": {
+        "method": "POST",
+        "url": "/todos"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "responses/postTodo.json",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "scenarioName": "Add and delete",
+      "requiredScenarioState": "Added",
+      "request": {
+        "method": "GET",
+        "url": "/todos"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "responses/getTodos.json",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "scenarioName": "Add and delete",
+      "requiredScenarioState": "Added",
+      "newScenarioState": "Initialized",
+      "request": {
+        "method": "DELETE",
+        "urlPattern": "/todos/.*"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
     }
   ]
 }
